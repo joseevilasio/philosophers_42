@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 11:06:51 by joneves-          #+#    #+#             */
-/*   Updated: 2024/12/31 13:18:07 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/12/31 17:19:03 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <pthread.h>
+
+int	ft_valid_arguments(int argc, char **argv);
 
 /* External functs.
 

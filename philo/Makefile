@@ -6,7 +6,7 @@
 #    By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/31 10:58:33 by joneves-          #+#    #+#              #
-#    Updated: 2024/12/31 13:30:54 by joneves-         ###   ########.fr        #
+#    Updated: 2024/12/31 17:29:38 by joneves-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@
 NAME = philo
 
 SRCS = main.c \
+	ft_valid_arguments.c \
 
 OBJS = $(SRCS:.c=.o)
 
