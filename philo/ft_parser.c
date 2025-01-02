@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_valid_arguments.c                               :+:      :+:    :+:   */
+/*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 17:17:58 by joneves-          #+#    #+#             */
-/*   Updated: 2024/12/31 18:00:19 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/02 19:27:54 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	ft_isdigit(int c)
+int	ft_valid_argument()
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	else
-		return (0);
+	
 }
 
-int	ft_valid_arguments(int argc, char **argv)
+int	ft_parser(int argc, char **argv)
 {
 	int	i;
 	int	z;
