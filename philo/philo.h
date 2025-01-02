@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 11:06:51 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/02 18:42:37 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/02 23:11:37 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,29 @@
 # include <pthread.h>
 # include <limits.h>
 
+typedef struct s_table
+{
+	int		realtime;
+	t_philo	**philos;
+}	t_table;
+
+typedef struct s_philo
+{
+	unsigned int	time_die;
+	unsigned int	time_eat;
+	unsigned int	time_sleep;
+	t_table			*table;
+}	t_philo;
+
 /* ft_parser.c */
 
-int	ft_parser(int argc, char **argv);
+int		ft_parser(int argc, char **argv);
 
 /* ft_philo_utils.c */
 
-int	ft_atoi(const char *str);
-int	ft_isdigit(int c);
+long	ft_atol(const char *str);
+int		ft_atoi(const char *str);
+int		ft_isdigit(int c);
 
 /* External functs.
 
