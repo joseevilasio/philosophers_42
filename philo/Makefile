@@ -6,7 +6,7 @@
 #    By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/31 10:58:33 by joneves-          #+#    #+#              #
-#    Updated: 2024/12/31 13:30:54 by joneves-         ###   ########.fr        #
+#    Updated: 2025/01/02 22:30:00 by joneves-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,8 @@
 NAME = philo
 
 SRCS = main.c \
+	ft_parser.c \
+	ft_philo_utils.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -22,7 +24,7 @@ CFLAGS = -Wall -Werror -Wextra -g -fsanitize=thread
 
 RM = rm -f
 
-VALGRIND = /usr/bin/valgrind --leak-check=full --track-fds=yes --trace-children=yes --show-leak-kinds=all
+VALGRIND = /usr/bin/valgrind --leak-check=full --show-leak-kinds=all
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
