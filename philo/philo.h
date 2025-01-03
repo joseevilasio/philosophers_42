@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 11:06:51 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/03 19:28:47 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/03 22:29:20 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,30 @@
 # include <pthread.h>
 # include <limits.h>
 
+# define MSG_GET_FORK "\033[1m\033[33m%lu %d has taken a fork\033[0m\n"
+# define MSG_EAT "\033[1m\033[35m%lu %d is eating\033[0m\n"
+# define MSG_SLEEP "\033[1m\033[34m%lu %d is sleeping\033[0m\n"
+# define MSG_THINK "\033[1m\033[32m%lu %d is thinking\033[0m\n"
+# define MSG_DEAD "\033[1m\033[31m%lu %d died\033[0m\n"
+
 // typedef struct s_table
 // {
 // 	int		realtime;
 // 	t_philo	**philos;
 // }	t_table;
 
-// typedef struct s_philo
-// {
-// 	unsigned int	time_die;
-// 	unsigned int	time_eat;
-// 	unsigned int	time_sleep;
-// 	t_table			*table;
-// }	t_philo;
+typedef struct s_philo
+{
+	int		id;
+	size_t	time_to_die;
+	size_t	time_to_eat;
+	size_t	time_to_sleep;
+	int		meal_goal;
+	int		meals;
+	size_t	last_meal;
+	size_t	start_time;
+	//t_table			*table;
+}	t_philo;
 
 /* ft_parser.c */
 
@@ -41,10 +52,19 @@ int		ft_parser(int argc, char **argv);
 
 /* ft_philo_utils.c */
 
-size_t			ft_get_time(void);
-long			ft_atol(const char *str);
-int				ft_atoi(const char *str);
-int				ft_isdigit(int c);
+size_t	ft_get_time(void);
+size_t	ft_elapsed_time(size_t start_time);
+long	ft_atol(const char *str);
+int		ft_atoi(const char *str);
+int		ft_isdigit(int c);
+
+/* ft_actions.c */
+
+void	ft_eat(t_philo *philo);
+void	ft_sleep(t_philo *philo);
+void	ft_think(t_philo *philo);
+void	ft_dead(t_philo *philo);
+void	ft_get_fork(t_philo *philo);
 
 /* External functs.
 

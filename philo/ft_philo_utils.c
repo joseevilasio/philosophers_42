@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 18:16:00 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/03 19:30:51 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/03 22:29:39 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ size_t	ft_get_time(void)
 
 	gettimeofday(&tv, NULL);
 	ms = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	return (ms);
+}
+
+size_t	ft_elapsed_time(size_t start_time)
+{
+	size_t	ms;
+
+	ms = ft_get_time() - start_time;
 	return (ms);
 }
 
