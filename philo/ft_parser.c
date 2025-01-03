@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 17:17:58 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/02 22:59:45 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:22:28 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,5 @@ int	ft_parser(int argc, char **argv)
 			return (-1);
 		i++;
 	}
-	printf("--> %ld\n", ft_atol(argv[1]));
 	return (0);
 }
