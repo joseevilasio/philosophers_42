@@ -6,7 +6,7 @@
 #    By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/31 10:58:33 by joneves-          #+#    #+#              #
-#    Updated: 2025/01/03 21:22:21 by joneves-         ###   ########.fr        #
+#    Updated: 2025/01/04 15:36:44 by joneves-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS = main.c \
 	ft_parser.c \
 	ft_philo_utils.c \
 	ft_actions.c \
+	ft_init.c \
 
 OBJS = $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 11:06:23 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/03 22:47:26 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/04 18:03:44 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,31 @@
 
 int	main(int argc, char **argv)
 {
-	t_philo	*philos;
+	t_philo	**philos;
+	t_table	*table;
 
-	philos = malloc(sizeof(t_philo));
-	philos->meals = 0;
-	philos->id = 1;
-	philos->time_to_die = ft_atoi(argv[2]);
-	philos->time_to_eat = ft_atoi(argv[3]);
-	philos->time_to_sleep = ft_atoi(argv[4]);
-	philos->meal_goal = ft_atoi(argv[5]);
 	if (ft_parser(argc, argv) != 0)
 		return (2);
-	// if (ft_init() != 0)
-	//	return (2);
-	// if (usleep(LONG_MAX) == -1)
-	// 	printf("error usleep\n");
-	printf("%lu\n", ft_get_time());
-	printf("Starting... \n");
-	
-	//usleep(ft_atol(argv[1]));
+	philos = ft_init_philos(argc, argv, table);
+	if (!philos)
+		return (1);
+	printf("%lu\n", ft_get_time()); //debug
+	printf("Starting... \n"); //debug
+
 	while (1)
 	{
-		ft_get_fork(philos);
-		ft_eat(philos);
-		ft_sleep(philos);
-		ft_think(philos);
-		usleep(200*1000);
-		if (ft_elapsed_time(philos->last_meal) >= philos->time_to_die)
+		ft_get_fork(philos[0]);
+		ft_eat(philos[0]);
+		ft_sleep(philos[0]);
+		ft_think(philos[0]);
+		usleep(400*1000);
+		if (ft_elapsed_time(philos[0]->last_meal) >= philos[0]->time_to_die)
 		{
-			printf("elapsed time: %lu\n", (ft_elapsed_time(philos->last_meal)));
-			ft_dead(philos);
+			printf("elapsed time: %lu\n", (ft_elapsed_time(philos[0]->last_meal)));
+			ft_dead(philos[0]);
 			break ;
 		}
-		if (philos->meals >= philos->meal_goal)
+		if (philos[0]->meals >= philos[0]->meal_goal)
 		{
 			printf("Meal Goal\n");
 			break ;

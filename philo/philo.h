@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 11:06:51 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/03 22:29:20 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/04 18:00:48 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@
 # define MSG_THINK "\033[1m\033[32m%lu %d is thinking\033[0m\n"
 # define MSG_DEAD "\033[1m\033[31m%lu %d died\033[0m\n"
 
-// typedef struct s_table
-// {
-// 	int		realtime;
-// 	t_philo	**philos;
-// }	t_table;
+typedef struct s_philo t_philo;
+
+typedef struct s_table
+{
+	//int		realtime;
+	t_philo	**philos;
+}	t_table;
 
 typedef struct s_philo
 {
@@ -42,8 +44,8 @@ typedef struct s_philo
 	int		meal_goal;
 	int		meals;
 	size_t	last_meal;
-	size_t	start_time;
-	//t_table			*table;
+	//size_t	start_time;
+	t_table	*table;
 }	t_philo;
 
 /* ft_parser.c */
@@ -65,6 +67,11 @@ void	ft_sleep(t_philo *philo);
 void	ft_think(t_philo *philo);
 void	ft_dead(t_philo *philo);
 void	ft_get_fork(t_philo *philo);
+
+/* ft_init.c */
+
+t_philo	**ft_init_philos(int argc, char **argv);
+t_table	*ft_init_table(t_philo **philos);
 
 /* External functs.
 
