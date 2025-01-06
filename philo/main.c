@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 11:06:23 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/04 18:03:44 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/05 18:34:02 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,23 @@
 
 int	main(int argc, char **argv)
 {
-	t_philo	**philos;
-	t_table	*table;
+	t_philo			**philos;
+	t_table			*table;
 
+	philos = NULL;
+	table = NULL;
 	if (ft_parser(argc, argv) != 0)
 		return (2);
+	table = ft_init_table(argc, argv, philos);
+	if (!table)
+		return (1);
 	philos = ft_init_philos(argc, argv, table);
 	if (!philos)
 		return (1);
 	printf("%lu\n", ft_get_time()); //debug
 	printf("Starting... \n"); //debug
-
-	while (1)
-	{
-		ft_get_fork(philos[0]);
-		ft_eat(philos[0]);
-		ft_sleep(philos[0]);
-		ft_think(philos[0]);
-		usleep(400*1000);
-		if (ft_elapsed_time(philos[0]->last_meal) >= philos[0]->time_to_die)
-		{
-			printf("elapsed time: %lu\n", (ft_elapsed_time(philos[0]->last_meal)));
-			ft_dead(philos[0]);
-			break ;
-		}
-		if (philos[0]->meals >= philos[0]->meal_goal)
-		{
-			printf("Meal Goal\n");
-			break ;
-		}
-	}
-	printf("%lu\n", ft_get_time());
+	ft_start(table, philos);
+	printf("%lu\n", ft_get_time()); //debug
+	pthread_mutex_destroy(&table->mutex);
 	return (0);
 }
