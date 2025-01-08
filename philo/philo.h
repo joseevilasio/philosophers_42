@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 11:06:51 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/05 21:28:58 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/07 19:27:39 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,23 @@ typedef struct s_table
 	int		number_of_philos;
 	int		meal_goal;
 	int		meal_goal_each;
-	int		go_on;
-	pthread_mutex_t	mutex;
+	int		all_alive;
+	size_t	time_to_die;
+	size_t	time_to_eat;
+	size_t	time_to_sleep;
+	pthread_mutex_t	mutex_meal;
+	pthread_mutex_t	mutex_alive;
 	t_philo	**philos;
 }	t_table;
 
 typedef struct s_philo
 {
 	int		id;
-	size_t	time_to_die;
-	size_t	time_to_eat;
-	size_t	time_to_sleep;
 	int		meals;
 	int		meal_goal;
 	int		reached;
 	int		fork;
 	size_t	last_meal;
-	//size_t	start_time;
 	t_table	*table;
 }	t_philo;
 
