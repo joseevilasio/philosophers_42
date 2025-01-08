@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 15:08:36 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/05 21:34:03 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/07 19:27:20 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@ static t_philo	*ft_create_philo(int argc, char **argv, int id, t_table *table)
 		return (NULL);
 	}
 	philo->id = id;
-	philo->time_to_die = ft_atoi(argv[2]);
-	philo->time_to_eat = ft_atoi(argv[3]);
-	philo->time_to_sleep = ft_atoi(argv[4]);
 	philo->meals = 0;
 	philo->reached = 0;
 	philo->fork = 1;
@@ -78,9 +75,13 @@ t_table	*ft_init_table(int argc, char **argv, t_philo **philos)
 		printf("Error: malloc table\n");
 		return (NULL);
 	}
-	pthread_mutex_init(&table->mutex, NULL);
+	pthread_mutex_init(&table->mutex_meal, NULL);
+	pthread_mutex_init(&table->mutex_alive, NULL);
 	table->number_of_philos = 0;
-	table->go_on = 1;
+	table->all_alive = 1;
 	table->philos = philos;
+	table->time_to_die = ft_atoi(argv[2]);
+	table->time_to_eat = ft_atoi(argv[3]);
+	table->time_to_sleep = ft_atoi(argv[4]);
 	return (table);
 }
