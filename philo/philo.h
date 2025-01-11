@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 11:06:51 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/07 19:27:39 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/11 21:21:52 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,17 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <limits.h>
+# include <stdbool.h>
+
+/* Colors and Style*/
+
+# define RESET "\033[0m"
+# define BOLD "\033[1m"
+# define RED "\033[31m"
+# define GREEN "\033[32m"
+# define YELLOW "\033[33m"
+# define BLUE "\033[34m"
+# define MAGENTA "\033[35m"
 
 # define MSG_TAKE_FORK "\033[1m\033[33m%lu %d has taken a fork\033[0m\n"
 # define MSG_EAT "\033[1m\033[35m%lu %d is eating\033[0m\n"
@@ -27,31 +38,39 @@
 # define MSG_THINK "\033[1m\033[32m%lu %d is thinking\033[0m\n"
 # define MSG_DIE "\033[1m\033[31m%lu %d died\033[0m\n"
 
-typedef struct s_philo t_philo;
+# define FIRST 1
+# define SECOND 2
+
+typedef struct s_philo	t_philo;
 
 typedef struct s_table
 {
-	int		number_of_philos;
-	int		meal_goal;
-	int		meal_goal_each;
-	int		all_alive;
-	size_t	time_to_die;
-	size_t	time_to_eat;
-	size_t	time_to_sleep;
-	pthread_mutex_t	mutex_meal;
+	int				number_of_philos;
+	int				meals_goal;
+	int				meals_goal_each;
+	bool			meals_goal_reached;
+	bool			all_alive;
+	size_t			start_time;
 	pthread_mutex_t	mutex_alive;
-	t_philo	**philos;
+	pthread_mutex_t	mutex_meal;
+	pthread_mutex_t	*mutex_fork;
+	t_philo			**philos;
 }	t_table;
 
 typedef struct s_philo
 {
-	int		id;
-	int		meals;
-	int		meal_goal;
-	int		reached;
-	int		fork;
-	size_t	last_meal;
-	t_table	*table;
+	int				id;
+	int				meals_eaten;
+	int				meals_to_eat;
+	bool			reached;
+	int				left_fork;
+	int				right_fork;
+	size_t			last_meal_time;
+	size_t			time_to_die;
+	size_t			time_to_eat;
+	size_t			time_to_sleep;
+	pthread_mutex_t	mutex_time;
+	t_table			*table;
 }	t_philo;
 
 /* ft_parser.c */
@@ -70,18 +89,32 @@ int		ft_isdigit(int c);
 
 void	ft_eat(t_philo *philo);
 void	ft_sleep(t_philo *philo);
-void	ft_think(t_philo *philo);
-void	ft_die(t_philo *philo);
 void	ft_take_fork(t_philo *philo);
+void	ft_think(t_philo *philo);
+
+/* ft_actions.c */
+
+void	ft_wait(t_philo *philo, size_t time);
+void	ft_solo_dining(t_philo *philo);
+int		ft_order_fork(t_philo *philo, int which);
 
 /* ft_init.c */
 
-t_philo	**ft_init_philos(int argc, char **argv, t_table *table);
-t_table	*ft_init_table(int argc, char **argv, t_philo **philos);
+t_table	*ft_init(int argc, char **argv);
+
+/* ft_free.c */
+
+void	ft_free(t_table *table);
 
 /* ft_start.c */
 
-void	ft_start(t_table *table, t_philo **philos);
+int		ft_start_dinner(t_table *table, t_philo **philos);
+
+/* ft_monitoring */
+
+void	ft_monitoring(t_table *table);
+bool	ft_check_everything(t_table *table);
+bool	ft_alive_print_msg(t_philo *philo, const char *msg);
 
 /* External functs.
 
