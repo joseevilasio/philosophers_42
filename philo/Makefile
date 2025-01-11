@@ -6,7 +6,7 @@
 #    By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/31 10:58:33 by joneves-          #+#    #+#              #
-#    Updated: 2025/01/05 16:05:07 by joneves-         ###   ########.fr        #
+#    Updated: 2025/01/11 20:57:54 by joneves-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,17 @@ SRCS = main.c \
 	ft_parser.c \
 	ft_philo_utils.c \
 	ft_actions.c \
+	ft_actions_utils.c \
 	ft_init.c \
-	ft_start.c \
+	ft_free.c \
+	ft_start_dinner.c \
+	ft_monitoring.c 
 
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g -fsanitize=thread
+#CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 
 RM = rm -f
 
@@ -46,7 +50,4 @@ fclean: clean
 re: fclean
 	$(MAKE) all
 
-test: $(NAME)
-	$(VALGRIND) ./$(NAME)
-
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re
