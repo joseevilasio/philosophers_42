@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 15:45:28 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/11 21:28:39 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/12 13:16:12 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 bool	ft_alive_print_msg(t_philo *philo, const char *msg)
 {
-	if (!ft_check_everything(philo->table))
-		return (false);
-	printf(msg, ft_elapsed_time(philo->table->start_time), philo->id + 1);
-	return (true);
+	bool	is_all_alive;
+
+	pthread_mutex_lock(&philo->table->mutex_alive);
+	is_all_alive = philo->table->all_alive;
+	if (is_all_alive)
+		printf(msg, ft_elapsed_time(philo->table->start_time), philo->id + 1);
+	pthread_mutex_unlock(&philo->table->mutex_alive);
+	return (is_all_alive);
 }
 
 bool	ft_check_everything(t_table *table)
