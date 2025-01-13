@@ -6,11 +6,62 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 18:16:00 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/13 19:59:06 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/13 22:08:33 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	if (size > 0 && dest)
+	{
+		while (src[i] && i < size - 1)
+		{
+			dest[i] = src[i];
+			i++;
+		}
+		dest[i] = '\0';
+	}
+	i = 0;
+	while (src[i])
+		i++;
+	return (i);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strdup(const char *src)
+{
+	char	*str;
+	int		i;
+
+	i = 0;
+	str = (char *) malloc(ft_strlen(src) * sizeof(char) + 1);
+	if (!str)
+		return (0);
+	while (src[i])
+	{
+		str[i] = src[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
 
 static unsigned int	ft_digitlen(int n)
 {

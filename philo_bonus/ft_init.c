@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 15:08:36 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/13 20:54:43 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/13 22:27:55 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static t_philo	*ft_create_philo(int argc, char **argv, int id, t_table *table)
 {
 	t_philo	*philo;
+	char	*tmp;
 
 	philo = (t_philo *) malloc(sizeof(t_philo));
 	if (!philo)
@@ -34,8 +35,10 @@ static t_philo	*ft_create_philo(int argc, char **argv, int id, t_table *table)
 		philo->meals_to_eat = ft_atoi(argv[5]);
 	table->meals_goal = philo->meals_to_eat;
 	//pthread_mutex_init(&philo->mutex_time, NULL);
+	tmp = ft_itoa(philo->id);
+	philo->sem_time_ref = ft_strjoin("/sem_time_", tmp);
 	philo->sem_time = sem_open("/sem_time", O_CREAT, 0644, 1);
-	return (philo);
+	return (free(tmp), philo);
 }
 
 static t_philo	**ft_init_philos(int argc, char **argv, t_table *table)
@@ -65,7 +68,7 @@ static t_philo	**ft_init_philos(int argc, char **argv, t_table *table)
 // 	int				i;
 // 	pthread_mutex_t	*forks;
 
-// 	forks = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t) \
+// 	forks = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t)
 // 		* table->number_of_philos);
 // 	if (!forks)
 // 		return (NULL);
@@ -90,7 +93,7 @@ static sem_t	**ft_init_sem(t_table *table)
 	if (!forks)
 		return (NULL);
 	sem_forks_ref = (char **) malloc(sizeof(char *) \
-		* table->number_of_philos + 1);
+		* ((table->number_of_philos) + 1));
 	if (!sem_forks_ref)
 		return (NULL);
 	i = 0;
@@ -98,6 +101,7 @@ static sem_t	**ft_init_sem(t_table *table)
 	{
 		tmp = ft_itoa(i);
 		sem_forks_ref[i] = ft_strjoin("/sem_fork_", tmp);
+		sem_unlink(sem_forks_ref[i]);
 		forks[i] = sem_open(sem_forks_ref[i], O_CREAT, 0644, 1);
 		free(tmp);
 		i++;
@@ -131,7 +135,9 @@ t_table	*ft_init(int argc, char **argv)
 	//	return (free(table->mutex_fork), free(table), NULL);
 	//pthread_mutex_init(&table->mutex_alive, NULL);
 	//pthread_mutex_init(&table->mutex_meal, NULL);
-	table->all_alive = sem_open("/sem_all_alive", O_CREAT, 0644, 1);
+	sem_unlink("/sem_alive");
+	table->sem_alive = sem_open("/sem_alive", O_CREAT, 0644, 1);
+	sem_unlink("/sem_meal");
 	table->sem_meal = sem_open("/sem_meal", O_CREAT, 0644, 1);
 	return (table);
 }

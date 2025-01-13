@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 11:06:51 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/13 20:37:08 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/13 22:24:54 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_philo
 	size_t			time_to_sleep;
 	//pthread_mutex_t	mutex_time;
 	sem_t			*sem_time;
+	char			*sem_time_ref;
 	t_table			*table;
 }	t_philo;
 

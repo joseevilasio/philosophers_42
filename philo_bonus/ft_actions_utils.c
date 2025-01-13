@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 21:16:37 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/11 21:21:36 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/13 22:26:03 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,16 @@ void	ft_wait(t_philo *philo, size_t time)
 	start = ft_get_time();
 	while ((ft_get_time() - start) < time)
 	{
-		pthread_mutex_lock(&philo->table->mutex_alive);
+		//pthread_mutex_lock(&philo->table->mutex_alive);
+		sem_wait(philo->table->sem_alive);
 		if (!philo->table->all_alive)
 		{
-			pthread_mutex_unlock(&philo->table->mutex_alive);
+			//pthread_mutex_unlock(&philo->table->mutex_alive);
+			sem_post(philo->table->sem_alive);
 			break ;
 		}
-		pthread_mutex_unlock(&philo->table->mutex_alive);
+		//pthread_mutex_unlock(&philo->table->mutex_alive);
+		sem_post(philo->table->sem_alive);
 		usleep(500);
 	}
 }
