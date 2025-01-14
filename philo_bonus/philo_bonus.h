@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 11:06:51 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/13 22:24:54 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/14 20:22:58 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#ifndef PHILO_BONUS_H
+# define PHILO_BONUS_H
 
 # include <string.h>
 # include <stdio.h>
@@ -54,9 +54,7 @@ typedef struct s_table
 	bool			meals_goal_reached;
 	bool			all_alive;
 	size_t			start_time;
-	//pthread_mutex_t	mutex_alive;
-	//pthread_mutex_t	mutex_meal;
-	//pthread_mutex_t	*mutex_fork;
+	pid_t			*pid;
 	sem_t			*sem_alive;
 	sem_t			*sem_meal;
 	sem_t			**sem_fork;
@@ -69,7 +67,7 @@ typedef struct s_philo
 	int				id;
 	int				meals_eaten;
 	int				meals_to_eat;
-	bool			reached;
+	bool			reached; //posso criar uma sem open para desbloquear quando ficar true
 	int				left_fork;
 	int				right_fork;
 	size_t			last_meal_time;
@@ -127,8 +125,9 @@ int		ft_start_dinner(t_table *table, t_philo **philos);
 /* ft_monitoring */
 
 void	ft_monitoring(t_table *table);
-bool	ft_check_everything(t_table *table);
+//bool	ft_check_everything(t_table *table);
 bool	ft_alive_print_msg(t_philo *philo, const char *msg);
+bool	ft_is_alive(t_table *table, t_philo *philo);
 
 /* External functs.
 
@@ -142,21 +141,23 @@ stdlib.h
 	malloc | free | exit
 
 unistd.h
-	write | usleep | write | fork | 
+	write | usleep | fork
 
 sys/time.h
 	gettimeofday
 
 pthread.h
-	pthread_create | pthread_detach | pthread_join | pthread_mutex_init
-	pthread_mutex_destroy | pthread_mutex_lock | pthread_mutex_unlock
+	pthread_create | pthread_detach | pthread_join
 
 signal.h
 	kill
 
+sys/wait.h
+	waitpid
+
 semaphore.h
-	sem_open | sem_post | sem_wait | sem_unlink
+	sem_open | sem_post | sem_close | sem_wait | sem_unlink
 
 */
 
-#endif //PHILO_H
+#endif //PHILO_BONUS_H

@@ -1,59 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_start_dinner.c                                  :+:      :+:    :+:   */
+/*   ft_start_dinner_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 15:45:28 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/11 21:00:10 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/14 20:24:51 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
-void	*ft_routine(void *data)
+void	ft_routine(t_philo *philo)
 {
-	t_philo	*philo;
-
-	philo = (t_philo *) data;
 	if ((philo->id + 1) % 2 == 0)
 		usleep(500);
 	while (1)
 	{
-		if (!ft_check_everything(philo->table))
+		if (!ft_is_alive(philo->table, philo))
 			break ;
 		ft_take_fork(philo);
 		ft_sleep(philo);
 		ft_think(philo);
-		if (!ft_check_everything(philo->table))
+		if (!ft_is_alive(philo->table, philo))
 			break ;
 	}
-	return (NULL);
 }
 
 int	ft_start_dinner(t_table *table, t_philo **philos)
 {
-	pthread_t	*threads;
-	int			i;
+	int	i;
+	(void)philos;
 
-	threads = (pthread_t *) malloc(table->number_of_philos * sizeof(pthread_t));
-	if (!threads)
-		return (printf("Error: malloc threads\n"), 1);
+	table->pid = (pid_t *) malloc(sizeof(pid_t) * table->number_of_philos);
+	if (!table->pid)
+		return (printf("Error: malloc pid\n"), 1);
 	i = 0;
 	while (i < table->number_of_philos)
 	{
-		if (pthread_create(&threads[i], NULL, &ft_routine, philos[i]) != 0)
-			return (free(threads), printf("Error: pthread create\n"), 1);
+		table->pid[i] = fork();
+		if (table->pid[i] == -1)
+			return (printf("Error: fork\n"), 1);
+		if (table->pid[i] == 0)
+			ft_routine(table->philos[i]);
+		ft_monitoring(table);
 		i++;
 	}
-	i = 0;
-	ft_monitoring(table);
-	while (i < table->number_of_philos)
-	{
-		if (pthread_join(threads[i], NULL) != 0)
-			return (free(threads), printf("Error: pthread join\n"), 1);
-		i++;
-	}
-	return (free(threads), 0);
+	return (0);
 }

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_philo_utils2.c                                  :+:      :+:    :+:   */
+/*   ft_philo_utils2_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 18:16:00 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/13 22:08:33 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/14 20:11:03 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {

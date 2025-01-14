@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init.c                                          :+:      :+:    :+:   */
+/*   ft_init_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 15:08:36 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/13 22:27:55 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/14 20:19:14 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 static t_philo	*ft_create_philo(int argc, char **argv, int id, t_table *table)
 {
@@ -34,7 +34,6 @@ static t_philo	*ft_create_philo(int argc, char **argv, int id, t_table *table)
 	if (argc == 6)
 		philo->meals_to_eat = ft_atoi(argv[5]);
 	table->meals_goal = philo->meals_to_eat;
-	//pthread_mutex_init(&philo->mutex_time, NULL);
 	tmp = ft_itoa(philo->id);
 	philo->sem_time_ref = ft_strjoin("/sem_time_", tmp);
 	philo->sem_time = sem_open("/sem_time", O_CREAT, 0644, 1);
@@ -133,10 +132,8 @@ t_table	*ft_init(int argc, char **argv)
 	table->philos = ft_init_philos(argc, argv, table);
 	//if (!table->philos)
 	//	return (free(table->mutex_fork), free(table), NULL);
-	//pthread_mutex_init(&table->mutex_alive, NULL);
-	//pthread_mutex_init(&table->mutex_meal, NULL);
 	sem_unlink("/sem_alive");
-	table->sem_alive = sem_open("/sem_alive", O_CREAT, 0644, 1);
+	table->sem_alive = sem_open("/sem_alive", O_CREAT, 0644, 0);
 	sem_unlink("/sem_meal");
 	table->sem_meal = sem_open("/sem_meal", O_CREAT, 0644, 1);
 	return (table);
