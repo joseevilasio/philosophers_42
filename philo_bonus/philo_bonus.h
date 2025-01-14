@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 11:06:51 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/14 20:22:58 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/14 21:19:25 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,6 @@ long	ft_atol(const char *str);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 
-/* ft_philo_utils2.c */
-
-char	*ft_itoa(int n);
-char	*ft_strjoin(char const *s1, char const *s2);
 
 /* ft_actions.c */
 

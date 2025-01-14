@@ -6,7 +6,7 @@
 #    By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/31 10:58:33 by joneves-          #+#    #+#              #
-#    Updated: 2025/01/14 20:10:08 by joneves-         ###   ########.fr        #
+#    Updated: 2025/01/14 21:19:49 by joneves-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ NAME = philo_bonus
 SRCS = main_bonus.c \
 	ft_parser_bonus.c \
 	ft_philo_utils_bonus.c \
-	ft_philo_utils2_bonus.c \
 	ft_actions_bonus.c \
 	ft_actions_utils_bonus.c \
 	ft_init_bonus.c \
