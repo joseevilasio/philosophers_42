@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 11:06:51 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/14 21:19:25 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:50:06 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <signal.h>
 # include <semaphore.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 
 /* Colors and Style*/
 
@@ -52,14 +53,12 @@ typedef struct s_table
 	int				meals_goal;
 	int				meals_goal_each;
 	bool			meals_goal_reached;
-	bool			all_alive;
 	size_t			start_time;
 	pid_t			*pid;
 	sem_t			*sem_alive;
-	sem_t			*sem_meal;
-	sem_t			**sem_fork;
-	char			**sem_fork_ref;
-	t_philo			**philos;
+	sem_t			*sem_go_on;
+	sem_t			*sem_forks;
+	t_philo			*philo;
 }	t_table;
 
 typedef struct s_philo
@@ -67,16 +66,11 @@ typedef struct s_philo
 	int				id;
 	int				meals_eaten;
 	int				meals_to_eat;
-	bool			reached; //posso criar uma sem open para desbloquear quando ficar true
-	int				left_fork;
-	int				right_fork;
+	bool			is_alive;
 	size_t			last_meal_time;
 	size_t			time_to_die;
 	size_t			time_to_eat;
 	size_t			time_to_sleep;
-	//pthread_mutex_t	mutex_time;
-	sem_t			*sem_time;
-	char			*sem_time_ref;
 	t_table			*table;
 }	t_philo;
 
@@ -92,7 +86,6 @@ long	ft_atol(const char *str);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 
-
 /* ft_actions.c */
 
 void	ft_eat(t_philo *philo);
@@ -104,7 +97,6 @@ void	ft_think(t_philo *philo);
 
 void	ft_wait(t_philo *philo, size_t time);
 void	ft_solo_dining(t_philo *philo);
-int		ft_order_fork(t_philo *philo, int which);
 
 /* ft_init.c */
 
@@ -116,14 +108,12 @@ void	ft_free(t_table *table);
 
 /* ft_start.c */
 
-int		ft_start_dinner(t_table *table, t_philo **philos);
+int		ft_start_dinner(t_table *table);
 
 /* ft_monitoring */
 
-void	ft_monitoring(t_table *table);
-//bool	ft_check_everything(t_table *table);
+void	*ft_monitoring(void *data);
 bool	ft_alive_print_msg(t_philo *philo, const char *msg);
-bool	ft_is_alive(t_table *table, t_philo *philo);
 
 /* External functs.
 

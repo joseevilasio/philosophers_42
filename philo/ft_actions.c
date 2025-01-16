@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 21:16:37 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/11 21:27:33 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/16 13:28:29 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_eat(t_philo *philo)
 {
 	if (!ft_alive_print_msg(philo, MSG_EAT))
 		return ;
-	philo->meals_eaten++;
+	philo->meals_eaten++; //TODO verificar logica para adicionar depois do wait
 	pthread_mutex_lock(&philo->mutex_time);
 	philo->last_meal_time = ft_get_time();
 	pthread_mutex_unlock(&philo->mutex_time);
