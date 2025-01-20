@@ -6,7 +6,7 @@
 #    By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/31 10:58:33 by joneves-          #+#    #+#              #
-#    Updated: 2025/01/11 20:57:54 by joneves-         ###   ########.fr        #
+#    Updated: 2025/01/20 11:34:38 by joneves-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ SRCS = main.c \
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=thread
-#CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
+#CFLAGS = -Wall -Werror -Wextra -g -pthread -fsanitize=thread
+CFLAGS = -Wall -Werror -Wextra -g -pthread -fsanitize=address
 
 RM = rm -f
 

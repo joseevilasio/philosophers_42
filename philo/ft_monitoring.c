@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 15:45:28 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/12 13:16:12 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/20 11:24:49 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,6 @@ void	ft_monitoring(t_table *table)
 			}
 			i++;
 		}
-		usleep(500);
+		usleep(100);
 	}
 }

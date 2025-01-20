@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 21:16:37 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/16 13:28:29 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/20 11:25:49 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@ void	ft_eat(t_philo *philo)
 {
 	if (!ft_alive_print_msg(philo, MSG_EAT))
 		return ;
-	philo->meals_eaten++; //TODO verificar logica para adicionar depois do wait
 	pthread_mutex_lock(&philo->mutex_time);
 	philo->last_meal_time = ft_get_time();
 	pthread_mutex_unlock(&philo->mutex_time);
+	ft_wait(philo, philo->time_to_eat);
+	philo->meals_eaten++; //TODO verificar logica para adicionar depois do wait
 	if (philo->meals_to_eat != -1 && !(philo->reached))
 	{
 		if (philo->meals_eaten == philo->meals_to_eat)
@@ -30,7 +31,6 @@ void	ft_eat(t_philo *philo)
 			pthread_mutex_unlock(&philo->table->mutex_meal);
 		}
 	}
-	ft_wait(philo, philo->time_to_eat);
 }
 
 void	ft_sleep(t_philo *philo)
@@ -42,7 +42,7 @@ void	ft_sleep(t_philo *philo)
 void	ft_think(t_philo *philo)
 {
 	if (ft_alive_print_msg(philo, MSG_THINK))
-		usleep(500);
+		usleep(100);
 }
 
 void	ft_take_fork(t_philo *philo)
