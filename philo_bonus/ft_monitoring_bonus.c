@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 15:45:28 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/16 15:03:50 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:15:49 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,14 @@ static void	ft_cleanup(t_table *table)
 
 bool	ft_alive_print_msg(t_philo *philo, const char *msg)
 {
+	bool	alive;
+
 	sem_wait(philo->table->sem_alive);
-	if (philo->is_alive)
+	alive = philo->is_alive;
+	if (alive)
 		printf(msg, ft_elapsed_time(philo->table->start_time), philo->id + 1);
 	sem_post(philo->table->sem_alive);
-	return (philo->is_alive);
+	return (alive);
 }
 
 void	*ft_monitoring(void *data)
@@ -51,9 +54,9 @@ void	*ft_monitoring(void *data)
 		if (elapsed_meal_time > philo->time_to_die && philo->is_alive)
 		{
 			philo->is_alive = false;
-			sem_post(philo->table->sem_alive);
 			printf(MSG_DIE, ft_elapsed_time(philo->table->start_time), \
 				philo->id);
+			sem_post(philo->table->sem_alive);
 			ft_cleanup(philo->table);
 			exit(0);
 		}
