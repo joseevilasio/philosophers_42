@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 15:45:28 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/20 11:24:49 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:13:28 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ static bool	ft_is_alive(t_table *table, t_philo *philo)
 	last_meal_time = ft_elapsed_time(philo->last_meal_time);
 	if (last_meal_time > philo->time_to_die)
 	{
-		printf(MSG_DIE, ft_elapsed_time(table->start_time), philo->id + 1);
 		pthread_mutex_lock(&table->mutex_alive);
+		printf(MSG_DIE, ft_elapsed_time(table->start_time), philo->id + 1);
 		table->all_alive = false;
-		pthread_mutex_unlock(&table->mutex_alive);
 		is_alive = false;
+		pthread_mutex_unlock(&table->mutex_alive);
 	}
 	pthread_mutex_unlock(&philo->mutex_time);
 	return (is_alive);

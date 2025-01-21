@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 21:16:37 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/11 21:21:36 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:14:10 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ void	ft_wait(t_philo *philo, size_t time)
 
 void	ft_solo_dining(t_philo *philo)
 {
-	ft_alive_print_msg(philo, MSG_TAKE_FORK);
-	ft_wait(philo, philo->time_to_die);
+	ft_wait(philo, philo->time_to_die + 100);
 }
 
 int	ft_order_fork(t_philo *philo, int which)

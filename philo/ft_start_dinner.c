@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 15:45:28 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/11 21:00:10 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/21 17:54:31 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	ft_start_dinner(t_table *table, t_philo **philos)
 			return (free(threads), printf("Error: pthread create\n"), 1);
 		i++;
 	}
-	i = 0;
 	ft_monitoring(table);
+	i = 0;
 	while (i < table->number_of_philos)
 	{
 		if (pthread_join(threads[i], NULL) != 0)
