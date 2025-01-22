@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 15:45:28 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/16 15:01:17 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/22 18:33:19 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_dinner_is_over(t_table *table)
 	i = 0;
 	while (i < table->number_of_philos)
 	{
-		kill(table->pid[i], SIGKILL); //os demais child nao encerra da maneira correta
+		kill(table->pid[i], SIGKILL);
 		i++;
 	}
 }
