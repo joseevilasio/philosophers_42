@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 15:45:28 by joneves-          #+#    #+#             */
-/*   Updated: 2025/01/21 19:15:49 by joneves-         ###   ########.fr       */
+/*   Updated: 2025/01/22 19:58:20 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	ft_alive_print_msg(t_philo *philo, const char *msg)
 	sem_wait(philo->table->sem_alive);
 	alive = philo->is_alive;
 	if (alive)
-		printf(msg, ft_elapsed_time(philo->table->start_time), philo->id + 1);
+		printf(msg, ft_elapsed_time(philo->table->start_time), philo->id);
 	sem_post(philo->table->sem_alive);
 	return (alive);
 }
